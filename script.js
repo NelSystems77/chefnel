@@ -1,5 +1,4 @@
-// Inicializar EmailJS
-function() {
+(function() {
     emailjs.init("F91PoU5GdLAIAfLsB");
 })();
 
@@ -52,17 +51,23 @@ function mostrarResumen() {
 }
 
 function enviarPedido() {
-    const btn = event.target;
+    // Uso seguro del evento para evitar errores en algunos navegadores
+    const btn = event.target; 
+    const textoOriginal = btn.innerText;
     btn.innerText = "Enviando...";
+    btn.disabled = true; // Evitar doble clic accidental
 
-    
     emailjs.send("service_1d9bnzc", "template_vjaw3k9", datosPedido)
         .then(function() {
             alert("Para Nel será un privilegio cocinar para ti, muchas gracias.");
             cancelarPedido(); // Limpia todo
+            btn.innerText = textoOriginal;
+            btn.disabled = false;
         }, function(error) {
-            alert("Hubo un error al enviar el pedido: " + JSON.stringify(error));
+            console.error("Error EmailJS:", error); // Para ver detalles en consola
+            alert("Hubo un error al enviar. Revisa la consola o intenta de nuevo.");
             btn.innerText = "Sí, enviar";
+            btn.disabled = false;
         });
 }
 
@@ -81,4 +86,3 @@ function cancelarPedido() {
     document.getElementById('orderForm').reset();
     window.scrollTo(0,0);
 }
-
