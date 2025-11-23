@@ -1,6 +1,6 @@
-// Inicializar EmailJS (REEMPLAZA CON TU PUBLIC KEY)
+// Inicializar EmailJS
 (function() {
-    emailjs.init("Xhjx6Bi97hovbXmXf");
+    emailjs.init("F91PoU5GdLAIAfLsB");
 })();
 
 let datosPedido = {};
@@ -56,7 +56,7 @@ function enviarPedido() {
     btn.innerText = "Enviando...";
 
     
-    emailjs.send("lacocinadelchefnel", "template_c5oekul", datosPedido)
+    emailjs.send("service_1d9bnzc", "template_vjaw3k9", datosPedido)
         .then(function() {
             alert("Para Nel será un privilegio cocinar para ti, muchas gracias.");
             cancelarPedido(); // Limpia todo
