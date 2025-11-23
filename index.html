@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Cocina de Nel - Pide tu desayuno</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+
+    <header class="video-header">
+        <video autoplay muted loop playsinline id="promoVideo">
+            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4">
+            Tu navegador no soporta video.
+        </video>
+        <div class="overlay">
+            <h1>La Cocina de Nel</h1>
+            <p>El sabor que te mereces</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <form id="orderForm">
+            <h2>Realiza tu Pre-orden</h2>
+            
+            <div class="form-group">
+                <label for="nombre">Nombre Completo</label>
+                <input type="text" id="nombre" required placeholder="Ej: Tia Mina">
+            </div>
+            
+            <div class="form-group">
+                <label for="servicio">Servicio o Departamento</label>
+                <input type="text" id="servicio" required placeholder="Ej: Finanzas">
+            </div>
+
+            <div class="form-group">
+                <label for="telefono">Número Telefónico</label>
+                <input type="tel" id="telefono" required placeholder="Ej: 8888-8888">
+            </div>
+
+            <div class="menu-section">
+                <h3>Personaliza tu Nel Pinto 🍛</h3>
+                
+                <div class="form-group">
+                    <label>Huevo 🥚</label>
+                    <select id="huevo">
+                        <option value="Picado">Picado</option>
+                        <option value="Pateado">Pateado (Estrellado)</option>
+                        <option value="Encebollado">Encebollado</option>
+                        <option value="Tierno">Tierno</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Queso 🧀</label>
+                    <select id="queso">
+                        <option value="Natural">Natural</option>
+                        <option value="Frito">Frito</option>
+                    </select>
+                </div>
+
+                <label class="checkbox-label">Extras:</label>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="maduro" value="Sí">
+                    <label for="maduro">Maduro</label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="salchichon" value="Sí">
+                    <label for="salchichon">Salchichón</label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="pan" value="Sí">
+                    <label for="pan">Pan</label>
+                </div>
+            </div>
+
+            <button type="button" onclick="mostrarResumen()" class="btn-primary">Revisar Pedido</button>
+        </form>
+    </main>
+
+    <div id="modalResumen" class="modal hidden">
+        <div class="modal-content">
+            <h3>Su Nel Pedido es:</h3>
+            <div id="resumenTexto"></div>
+            
+            <p class="question">¿Desea enviar su Nel pedido?</p>
+            
+            <div class="modal-actions" id="botonesPrincipales">
+                <button onclick="enviarPedido()" class="btn-confirm">Sí, enviar</button>
+                <button onclick="mostrarOpcionesNo()" class="btn-cancel">No</button>
+            </div>
+
+            <div class="modal-actions hidden" id="botonesEdicion">
+                <p>¿Qué desea hacer?</p>
+                <button onclick="editarPedido()" class="btn-edit">Editar pedido</button>
+                <button onclick="cancelarPedido()" class="btn-delete">Cancelar pedido</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Registro del Service Worker para PWA
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('SW registrado', reg))
+            .catch(err => console.warn('Error SW', err));
+        }
+    </script>
+</body>
+</html>
