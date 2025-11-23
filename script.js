@@ -1,5 +1,5 @@
 // Inicializar EmailJS
-(function() {
+function() {
     emailjs.init("F91PoU5GdLAIAfLsB");
 })();
 
@@ -81,3 +81,4 @@ function cancelarPedido() {
     document.getElementById('orderForm').reset();
     window.scrollTo(0,0);
 }
+
